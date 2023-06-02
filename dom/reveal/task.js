@@ -1,6 +1,6 @@
-window.addEventListener('scroll', function () {
-	let revealElements = document.querySelectorAll('.reveal');
+const revealElements = document.querySelectorAll('.reveal');
 
+window.addEventListener('scroll', () => {
 	for (let i = 0; i < revealElements.length; i++) {
 		let element = revealElements[i];
 		let elementPosition = element.getBoundingClientRect();

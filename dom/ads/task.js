@@ -1,6 +1,5 @@
 const elements = Array.from(document.querySelectorAll('.rotator__case'));
-
-
+elements[0].classList.add('rotator__case_active');
 
 function nextElement() {
 	for (const element of elements) {
@@ -9,17 +8,16 @@ function nextElement() {
 			element.classList.remove('rotator__case_active');
 			if (elementIndex + 1 === elements.length) {
 				elementIndex = 0;
-				elements[elementIndex].classList.add('rotator__case_active');
-				return console.log('start')
 			} else {
-				const nextElementSearch = elements[elementIndex + 1]
-				nextElementSearch.classList.add('rotator__case_active')
-				const dataColor = nextElementSearch.getAttribute('data-color');
-				nextElementSearch.style.color = dataColor;
-				return console.log('все вроде работает')
+				elementIndex += 1;
 			}
+			elements[elementIndex].classList.add('rotator__case_active');
+			const nextElementSearch = elements[elementIndex];
+			const dataColor = nextElementSearch.getAttribute('data-color');
+			nextElementSearch.style.color = dataColor;
+			break;
 		}
 	}
 }
 
-setInterval(nextElement, 1000)
+setInterval(nextElement, 1000);

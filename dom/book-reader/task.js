@@ -1,5 +1,5 @@
 const fontSizeSmall = document.querySelectorAll('.font-size');
-const bookBig = document.getElementById('book')
+const bookBig = document.getElementById('book');
 
 fontSizeSmall.forEach((size) => {
 	size.addEventListener('click', (event) => {
@@ -8,23 +8,23 @@ fontSizeSmall.forEach((size) => {
 			el.classList.remove('font-size_active');
 		});
 
-		size.classList.add('font-size_active')
+		size.classList.add('font-size_active');
 		if (size.classList.contains('font-size_small')) {
-			bookBig.classList.add('font-size_small')
+			bookBig.classList.add('book_fs-small');
 		} else {
-			bookBig.classList.remove('font-size_small')
+			bookBig.classList.remove('book_fs-small');
 		}
 
 		if (size.classList.contains('font-size_big')) {
-			bookBig.classList.add('font-size_big')
+			bookBig.classList.add('book_fs-big');
 		} else {
-			bookBig.classList.remove('font-size_big')
+			bookBig.classList.remove('book_fs-big');
 		}
 	});
 });
 
 const fontSizeBig = document.querySelectorAll('.font-size');
-const bookSmall = document.getElementById('book')
+const bookSmall = document.getElementById('book');
 
 fontSizeBig.forEach((size) => {
 	size.addEventListener('click', (event) => {
@@ -33,81 +33,51 @@ fontSizeBig.forEach((size) => {
 			el.classList.remove('font-size_active');
 		});
 
-		size.classList.add('font-size_active')
+		size.classList.add('font-size_active');
 		if (size.classList.contains('font-size_small')) {
-			bookSmall.classList.add('font-size_small')
+			bookSmall.classList.add('book_fs-small');
 		} else {
-			bookSmall.classList.remove('font-size_small')
+			bookSmall.classList.remove('book_fs-small');
 		}
 
 		if (size.classList.contains('font-size_big')) {
-			bookSmall.classList.add('font-size_big')
+			bookSmall.classList.add('book_fs-big');
 		} else {
-			bookSmall.classList.remove('font-size_big')
+			bookSmall.classList.remove('book_fs-big');
 		}
 	});
 });
 
-
 const textColorLinks = document.querySelectorAll('.book__control_color .color');
-const contant = document.querySelectorAll('p')
-
-
+const bookContent = document.querySelector('.book__content');
 
 textColorLinks.forEach((text) => {
 	text.addEventListener('click', (event) => {
-		event.preventDefault()
+		event.preventDefault();
 		textColorLinks.forEach((el) => {
-			el.classList.remove('color_active')
-		})
-		text.classList.add('color_active')
+			el.classList.remove('color_active');
+		});
+		text.classList.add('color_active');
 
-		if (text.classList.contains('text_color_whitesmoke')) {
-			book.classList.add('book_color-whitesmoke')
-		} else {
-			book.classList.remove('book_color-whitesmoke')
-		}
+		const textColor = text.dataset.textColor;
+		bookContent.classList.remove('book_color-black', 'book_color-gray', 'book_color-whitesmoke');
+		bookContent.classList.add(`book_color-${textColor}`);
+	});
+});
 
-		if (text.classList.contains('text_color_gray')) {
-			book.classList.add('text_color_gray')
-		} else {
-			book.classList.remove('text_color_gray')
-		}
-
-		if (text.classList.contains('text_color_black')) {
-			book.classList.add('text_color_black')
-		} else {
-			book.classList.remove('text_color_black')
-		}
-	})
-})
-
-const textBgLinks = document.querySelectorAll('.book__control_background .color')
+const textBgLinks = document.querySelectorAll('.book__control_background .color');
+const book = document.querySelector('.book');
 
 textBgLinks.forEach((text) => {
 	text.addEventListener('click', (event) => {
-		event.preventDefault()
+		event.preventDefault();
 		textBgLinks.forEach((el) => {
-			el.classList.remove('color_active')
-		})
-		text.classList.add('color_active')
+			el.classList.remove('color_active');
+		});
+		text.classList.add('color_active');
 
-		if (text.classList.contains('bg_color_black')) {
-			book.classList.add('bg_color_black')
-		} else {
-			book.classList.remove('bg_color_black')
-		}
-
-		if (text.classList.contains('bg_color_gray')) {
-			book.classList.add('bg_color_gray')
-		} else {
-			book.classList.remove('bg_color_gray')
-		}
-
-		if (text.classList.contains('bg_color_white')) {
-			book.classList.add('bg_color_white')
-		} else {
-			book.classList.remove('bg_color_white')
-		}
-	})
-})
+		const bgColor = text.dataset.bgColor;
+		book.classList.remove('book_bg-black', 'book_bg-gray', 'book_bg-white');
+		book.classList.add(`book_bg-${bgColor}`);
+	});
+});
