@@ -5,113 +5,107 @@ const decMinus = document.querySelectorAll('.product__quantity-control_dec');
 const decPlus = document.querySelectorAll('.product__quantity-control_inc');
 // кнопки плюс
 const numberProduct = document.querySelectorAll('.product__quantity-value');
-//число продуктов при нажатии на +
+// число продуктов при нажатии на +
 const buttonProduct = document.querySelectorAll('.product__add');
-//кнопка положить в корзину 
+// кнопка положить в корзину 
 const cartProduct = [];
-// массив хранящий список продуктов которые положили в корзину 
+// массив хранящий список продуктов, которые положили в корзину 
 
 
-//кнопка минуса 
+// кнопка минуса 
 decMinus.forEach((minus, index) => {
-	//прохожусь массивом по кнопкам 
+	// проходимся массивом по кнопкам 
 	minus.addEventListener('click', () => {
-		// навешиваю обработчик 
-		let number = parseInt(numberProduct[index].textContent) // парсент делает число целым, и делает его числом, а не строкой 
-		// пресваиваю в переменную данное число на странице 
+		// навешиваем обработчик 
+		let number = parseInt(numberProduct[index].textContent); // парсим число на странице 
+		// присваиваем в переменную данное число на странице 
 		if (number === 1) {
-			numberProduct[index].textContent = 1
-			// проверяю если данное число на странице равно единице, то оно и будет оставаться еденицой  
+			numberProduct[index].textContent = 1;
+			// проверяем, если данное число на странице равно единице, то оно и будет оставаться единицей  
 		} else {
-			number -= 1
-			// условие что бы число на странице не пошло в минус 
-			numberProduct[index].textContent = number
+			number -= 1;
+			// условие, чтобы число на странице не стало отрицательным 
+			numberProduct[index].textContent = number;
 		}
-	})
-})
+	});
+});
 
 decPlus.forEach((plus, index) => {
-	//прохожусь массивом по кнопкам 
+	// проходимся массивом по кнопкам 
 	plus.addEventListener('click', () => {
-		// навешиваю обработчик 
-		let number = parseInt(numberProduct[index].textContent)
-		// пресваиваю в переменную данное число на странице 
-		number += 1
+		// навешиваем обработчик 
+		let number = parseInt(numberProduct[index].textContent);
+		// присваиваем в переменную данное число на странице 
+		number += 1;
 		// с каждым кликом число увеличивается на 1 
-		numberProduct[index].textContent = number
-		//вывод числа на экран 
-	})
-})
+		numberProduct[index].textContent = number;
+		// выводим число на экран 
+	});
+});
 
 buttonProduct.forEach((button, index) => {
-	// прошелся по кнопкам в корзину 
+	// проходимся по кнопкам "положить в корзину" 
 	button.addEventListener('click', () => {
-		// навешал обрботчик 
-		const product = products[index]
-		// продукт из списка продуктов
-		const productId = product.dataset.id
-		// айди продукта из списка продуктов 
-		const productImage = product.querySelector('.product__image').getAttribute('src')
+		// навешиваем обработчик 
+		const product = products[index];
+		// выбираем продукт из списка продуктов
+		const productId = product.dataset.id;
+		// ID продукта из списка продуктов 
+		const productImage = product.querySelector('.product__image').getAttribute('src');
 		// картинка продукта из списка продуктов 
-		const quantityNumber = parseInt(numberProduct[index].textContent)
-		//  данное число на странице 
+		const quantityNumber = parseInt(numberProduct[index].textContent);
+		// число продуктов на странице 
 
-		const idCartProduct = cartProduct.indexOf(item => item.id === productId)
-		// поиск картинки в массиве по айди, если есть то плюс 1
+		const idCartProduct = cartProduct.findIndex(item => item.id === productId);
+		// поиск продукта в массиве корзины по ID, если найден, то возвращает его индекс
 
 		if (idCartProduct !== -1) {
-			numberProduct[index].textContent.quantityNumber += quantityNumber
-			// если у нас индех возвращает что что то в масиве есть то мы просто полюсуем к этому значению
+			cartProduct[idCartProduct].quantity += quantityNumber;
+			// если индекс не равен -1, значит продукт уже есть в корзине, поэтому увеличиваем его количество
 		} else {
 			const objProduct = {
 				id: productId,
 				image: productImage,
 				quantity: quantityNumber,
-			}
-			// если нет, то создаем новый обект с продуктом где его айди картинка и номер и пушим в массив корзина 
-			cartProduct.push(objProduct)
+			};
+			// если продукта нет в корзине, то создаем новый объект с продуктом (ID, картинка, количество) и добавляем в массив корзины
+			cartProduct.push(objProduct);
 		}
-		console.log(cartProduct)
-		renderCartItems()
-		// функция показа продукта на экране 
-		animateProductToCart(productImage)
-	})
-})
+		console.log(cartProduct);
+		renderCartItems();
+		// функция отображения продуктов на экране корзины 
+		animateProductToCart(productImage);
+	});
+});
 
 function renderCartItems() {
 	const cartContainer = document.querySelector('.cart__products');
-	//нашли корзину
+	// находим контейнер корзины
 	cartContainer.innerHTML = '';
-	//обнулили ее 
+	// очищаем его 
 	cartProduct.forEach(item => {
-		// прошлись по ней фоичем, дабы поменять конечный продукт
+		// проходимся по элементам массива корзины
 		const cartProductElement = document.createElement('div');
-		// создал див 
+		// создаем элемент для продукта в корзине
 		cartProductElement.classList.add('cart__product');
-		// закинул в него класс корзины 
+		// добавляем класс для элемента корзины
 		cartProductElement.dataset.id = item.id;
-		// установил что моя карзина теперь id продукта 
-
+		// устанавливаем ID продукта для элемента корзины
 
 		const productImage = document.createElement('img');
-		// создал има Борисович 
+		// создаем элемент изображения продукта
 		productImage.classList.add('cart__product-image');
-		// добавил в него класс
+		// добавляем класс для изображения
 		productImage.src = item.image;
-		//установил новый имадж обекту 
+		// устанавливаем новое изображение продукта
 		cartProductElement.appendChild(productImage);
-		//добавил после родителя 
+		// добавляем изображение внутрь элемента корзины
 
 		const productCount = document.createElement('div');
 		productCount.classList.add('cart__product-count');
 		productCount.textContent = item.quantity;
 		cartProductElement.appendChild(productCount);
 		cartContainer.appendChild(cartProductElement);
-		// все тоже самое и тут, только с числом продукта 
+		// все то же самое, только с количеством продукта 
 	});
 }
-
-
-
-
-
