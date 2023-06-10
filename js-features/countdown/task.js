@@ -4,12 +4,12 @@ let count = 59;
 let message = 'вы согласны почку продать?'
 let timer = setInterval(() => {
 	count--;
-	elementNumber.innerHTML = count;
+	elementNumber.textContent = count;
 	if (count < 0) {
 		result = window.confirm(message)
 		clearInterval(timer);
 	}
-}, 10)
+}, 1000)
 
 elementNumber.onclick = function () {
 	if ((window.confirm(message))) {

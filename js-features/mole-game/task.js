@@ -10,10 +10,10 @@ hole.forEach(holes => {
 		const plus = holes.className.includes('hole_has-mole');
 		if (plus) {
 			deadGame++
-			dead.innerHTML = deadGame
+			dead.textContent = deadGame
 		} else {
 			lostGame++
-			lost.innerHTML = lostGame
+			lost.textContent = lostGame
 		}
 		if (deadGame > 9) {
 			alert('you win')
@@ -28,6 +28,6 @@ hole.forEach(holes => {
 function resetGame() {
 	deadGame = 0;
 	lostGame = 0;
-	dead.innerHTML = deadGame;
-	lost.innerHTML = lostGame;
+	dead.textContent = deadGame;
+	lost.textContent = lostGame;
 }

@@ -14,7 +14,7 @@ function createTask(title) {
 
 	const removeButton = document.createElement('a');
 	removeButton.classList.add('task__remove');
-	removeButton.innerHTML = '&times;';
+	removeButton.innerHTML = '&times;'; // крестик 
 	removeButton.addEventListener('click', () => {
 		taskElement.remove(); // Удаляем задачу при клике на кнопку удаления
 	});
