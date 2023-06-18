@@ -74,7 +74,6 @@ buttonProduct.forEach((button, index) => {
 		console.log(cartProduct);
 		renderCartItems();
 		// функция отображения продуктов на экране корзины 
-		animateProductToCart(productImage);
 	});
 });
 

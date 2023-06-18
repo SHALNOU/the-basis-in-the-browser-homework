@@ -1,20 +1,15 @@
-const obj = {
-	name: 'vlad',
-	gender: 'myj',
-	statys: 'it',
+
+const modal = document.getElementById('subscribe-modal');
+const closeButton = modal.querySelector('.modal__close');
+const isModalClosed = document.cookie.includes('modalClosed=true');
+
+
+if (!isModalClosed) {
+	modal.classList.add('modal_active');
+}
+const closeModal = () => {
+	modal.classList.remove('modal_active');
+	document.cookie = 'modalClosed=true';
 };
 
-function objArr(obj) {
-	let arrObj = [];
-	let arrIndex = [];
-
-	for (let key in obj) {
-		arrObj.push(obj[key]);
-		arrIndex.push(key);
-	}
-
-	return [arrObj, arrIndex];
-}
-
-const [resultObj, resultIndex] = objArr(obj);
-console.log(resultObj, resultIndex);
+closeButton.addEventListener('click', closeModal);

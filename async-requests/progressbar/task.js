@@ -1,4 +1,4 @@
-const form = document.getElementById('myForm');
+const form = document.getElementById('form');
 const progress = document.getElementById('progress');
 
 form.addEventListener('submit', (e) => {
@@ -19,7 +19,6 @@ form.addEventListener('submit', (e) => {
 			if (xhr.status === 200) {
 				// Загрузка завершена успешно
 				console.log('Загрузка завершена успешно');
-				progress.value = 100; // Устанавливаем значение прогресса на максимум
 			} else {
 				// Произошла ошибка при загрузке
 				console.error('Произошла ошибка при загрузке');
